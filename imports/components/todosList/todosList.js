@@ -23,7 +23,6 @@ export default angular.module('todosList', [
                     if(error){
                         console.log(error);
                     }else{
-                        Meteor.call('users.saveSearch', newPlace);
 
                         result.businesses.forEach(function(entry) {
 

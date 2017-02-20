@@ -1,43 +1,32 @@
-<header>
+<header id="banner">
   <h1 class="text-center">PLANS TONIGHT?</h1>
   <login-buttons></login-buttons>
-
   <div>
     <h2 class="text-center">
       See which bars are hoppin' tonight and RSVP ahead of time!
     </h2>
-  </div>
-  <div>
     <h2 class="text-center">
       Remember: take a cab and drink responsibly.
     </h2>
   </div>
-
-  <form class="search" ng-submit="newSearch(newPlace)">
-    <input ng-model="newPlace" type="text" name="text" placeholder="WHERE YOU AT?"/>
+  <form class="search" ng-submit="newSearch(newPlace)">   
+    <div class="form-group col-xs-10">
+      <input ng-model="newPlace" type="text" name="text" class="form-control" placeholder="WHERE YOU AT?"/>
+    </div>
+    <button type="submit" class="btn btn-default col-xs-2">go</button>
   </form>
-  
 </header>
 
-<div class="text-center" ng-show="searching">
-  <br/>
-  <br/>
-  <p>Hang On...We are Searching...</p>
-</div>
-
-
-<ul>
+<ul class="form-list">
+  <div class="searching" ng-show="searching"><i class="fa fa-cog"></i></div>
   <li ng-repeat="store in stores">
-
-    <img src="{{store.image_url}}" alt="storeImg">
-
-    <button class="going" id="{{store.id}}" ng-click="addGoing(store)">
-    {{ store.amGoing ? "I am going here!" : "Count me in!"}}</button>
-
-    <a href="{{store.url}}" target="_blank"><span class="text" >{{store.name}}</span></a>
-    <span>{{store.count}} Goings!</span>
-
-    <p>{{store.snippet_text}}</p>
-    
+    <div class="form-group col-sm-2"><img src="{{store.image_url}}" alt="storeImg"></div>
+    <div class="form-group col-sm-8">
+      <a href="{{store.url}}" target="_blank"><span class="text" >{{store.name}}</span></a>
+      <span id="count">{{store.count}} Goings!</span>
+    </div>
+    <button class="going btn btn-default col-sm-2" id="{{store.id}}" ng-click="addGoing(store)">
+    {{ store.amGoing ? "I am going!" : "Count me in!"}}</button>
+    <div class="snippet">{{store.snippet_text}}</div>
   </li>
 </ul>
