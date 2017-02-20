@@ -3,7 +3,6 @@ import {Mongo} from 'meteor/mongo';
 import {check} from 'meteor/check';
 
 export const Stores = new Mongo.Collection('stores');
-export const Users = new Mongo.Collection('users');
 
 if (Meteor.isServer) {
   	// This code only runs on the server
@@ -20,17 +19,18 @@ Meteor.methods({
 
 		// Make sure the user is logged in
 		if(!Meteor.userId()){
-			alert('Please Sign In to Add Going!');
+			//alert('Please Sign In to Add Going!');
+			return 0;
 		}else{
 			const store = Stores.findOne({'storeId': id});
 			if(store){
 
 				if(store.user.includes(Meteor.userId())){
 					Stores.update({'storeId': id}, { $pull: {user: Meteor.userId()}, $inc: {count: -1} });
-					return false;
+					return -1;
 				}else{
 					Stores.update({'storeId': id}, { $push: {user: Meteor.userId()}, $inc: {count: 1} });
-					return true;
+					return 1;
 				}
 
 			}else{
@@ -39,10 +39,10 @@ Meteor.methods({
 					count: 1,
       				user: [Meteor.userId()]
 				});
-				return true;
+				return 1;
 			}
 		}
-		return false;
+		
 	},
 	'stores.getCount'(id){
 
@@ -69,9 +69,6 @@ Meteor.methods({
 			return false;
 		}
 	},
-	'user.saveSearch'(user){
-
-	}
 
 });
 

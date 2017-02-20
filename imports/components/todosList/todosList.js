@@ -23,6 +23,7 @@ export default angular.module('todosList', [
                     if(error){
                         console.log(error);
                     }else{
+                        Meteor.call('users.saveSearch', newPlace);
 
                         result.businesses.forEach(function(entry) {
 
@@ -42,23 +43,58 @@ export default angular.module('todosList', [
                         $scope.stores = result.businesses;
                         $scope.$apply();
                     }
-                });
-
-                
+                });    
             };
 
             $scope.addGoing = function(store) {
 
                 Meteor.call('stores.addGoing', store.id, function(error, result){
-                    store.amGoing = result;
-                    if(result){
+                    
+                    if(result === 1){
+                        store.amGoing = true;
                         store.count ++;
-                    }else{
+                    }else if(result === -1){
+                        store.amGoing = false;
                         store.count --;
+                    }else{
+                        alert('Please Sign In to Add Going!');
+                        store.amGoing = false;
                     }
                     $scope.$apply();
                 });
-            }
+            };
+
+            Accounts.onLogin(function(){
+
+                if($scope.stores){
+
+                    $scope.stores.forEach(function(entry) {
+
+                        Meteor.call('stores.amGoing', entry.id, function(error, result){
+
+                            entry.amGoing = result;
+                            $scope.$apply();
+                        });
+                    });
+
+                    $scope.$apply();
+                }
+                
+            });
+
+            Accounts.onLogout(function(){
+
+                if($scope.stores){
+
+                    $scope.stores.forEach(function(entry) {
+
+                        entry.amGoing = false;
+                    });
+
+                    $scope.$apply();
+                }
+                
+            });
 
         }]
     });

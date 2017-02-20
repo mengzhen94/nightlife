@@ -32,7 +32,6 @@ header {
  
 #login-buttons {
     display: inline;
-    float : right;
 }
 
 img{
@@ -102,10 +101,6 @@ li {
  
 li .text {
     margin-left: 10px;
-}
- 
-.toggle-private {
-    margin-left: 5px;
 }
  
 @media (max-width: 600px) {
