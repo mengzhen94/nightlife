@@ -21,3 +21,5 @@ angular-templates
 accounts-password
 dotansimha:accounts-ui-angular
 practicalmeteor:mocha
+twbs:bootstrap
+session

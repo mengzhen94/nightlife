@@ -1,30 +1,43 @@
 <header>
-  <h1>Todo List ({{$ctrl.imcompletedCount}})</h1>
-
-  <label class="hide-completed">
-    <input type="checkbox" ng-model="$ctrl.hideCompleted" />
-    Hide Completed Tasks
-  </label>
-
+  <h1 class="text-center">PLANS TONIGHT?</h1>
   <login-buttons></login-buttons>
 
-  <form class="new-task" ng-submit="$ctrl.addTask($ctrl.newTask)" ng-show="$ctrl.currentUser">
-  	<input ng-model="$ctrl.newTask" type="text" name="text" placeholder="Type to add new tasks"/>
+  <div>
+    <h2 class="text-center">
+      See which bars are hoppin' tonight and RSVP ahead of time!
+    </h2>
+  </div>
+  <div>
+    <h2 class="text-center">
+      Remember: take a cab and drink responsibly.
+    </h2>
+  </div>
+
+  <form class="search" ng-submit="newSearch(newPlace)">
+    <input ng-model="newPlace" type="text" name="text" placeholder="WHERE YOU AT?"/>
   </form>
+  
 </header>
- 
+
+<div class="text-center" ng-show="searching">
+  <br/>
+  <br/>
+  <p>Hang On...We are Searching...</p>
+</div>
+
+
 <ul>
-  <li ng-repeat="task in $ctrl.tasks" ng-class="{'checked': task.checked, 'private': task.private}">
-  	<button class="delete" ng-click="$ctrl.removeTask(task)">&times;</button>
+  <li ng-repeat="store in stores">
 
-  	<input type="checkbox" ng-checked="task.checked" ng-click="$ctrl.setChecked(task)" class="toggle-checked">
+    <img src="{{store.image_url}}" alt="storeImg">
 
-  	<span class="text">
-  		<strong>{{task.username}}</strong> - {{task.text}}
-  	</span>
+    <button class="going" id="{{store.id}}" ng-click="addGoing(store)">
+    {{ store.amGoing ? "I am going here!" : "Count me in!"}}</button>
 
-    <button class="toggle-private" ng-click="$ctrl.setPrivate(task)" ng-show="task.owner === $ctrl.currentUser._id">
-      {{task.private == true? "Private" : "Public"}}
-    </button>
+    <a href="{{store.url}}" target="_blank"><span class="text" >{{store.name}}</span></a>
+    <span>{{store.count}} Goings!</span>
+
+    <p>{{store.snippet_text}}</p>
+    
   </li>
 </ul>
