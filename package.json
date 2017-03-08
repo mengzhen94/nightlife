@@ -2,7 +2,8 @@
   "name": "nightlife",
   "private": true,
   "scripts": {
-    "start": "meteor --settings settings.json"
+    "start1": "meteor --settings settings.json",
+     "start": "meteor run"
   },
   "dependencies": {
     "angular": "^1.6.2",
