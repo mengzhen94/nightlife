@@ -2,13 +2,7 @@
 ## Description
 - Developed Nightlife Bar App using AngularJS, Meteor.js framework and MongoDB database
 - Implemented club search via Yelp API. Allowed users to view all the bars in the area, mark or unmark a bar as one’s favorite
-- Dockerize the application and deploy on AWS ECS
-
-## User stories:
-- As an unauthenticated user, I can view all bars in my area.
-- As an authenticated user, I can add myself to a bar to indicate I am going there tonight.
-- As an authenticated user, I can remove myself from a bar if I no longer want to go there.
-- As an unauthenticated user, when I login I should not have to search again.
+- Dockerized and deployed using AWS EC2 Container Service
 
 ## Dockerize and Deploy to AWS
 ### Clone and Build APP
